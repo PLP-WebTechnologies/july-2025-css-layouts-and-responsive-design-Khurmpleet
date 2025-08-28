@@ -1,0 +1,99 @@
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+/* Page grid: header / nav main aside / footer */
+.grid-layout {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "nav  nav    nav"
+    "main    main   aside"
+    "footer footer footer";
+  grid-template-columns: 1fr 2fr 1fr;   /* nav | main | aside */
+  grid-template-rows: auto auto 1fr auto;   /* header | content | footer */
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+/* Map elements to named areas */
+header { grid-area: header; }
+nav    { grid-area: nav; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+
+/* Header (Flexbox proof) */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Nav */
+nav{
+  background: #333;
+  padding: 0.5rem 1rem;}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* better on smaller widths */
+}
+nav a {
+  color: #fff;
+  text-decoration: underline red;
+}
+
+/* Content blocks */
+section, aside {
+  background: #f4f4f4;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Responsive: stack layout on small screens */
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto auto;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    display: block;           /* larger tap targets */
+    padding: 0.4rem 0.6rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+  }
+}
+
+/* Nice-to-have: smooth anchor scrolling */
+html { scroll-behavior: smooth; }
